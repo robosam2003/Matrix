@@ -11,12 +11,12 @@
 using namespace std;
 
 
-template<unsigned int rows, unsigned int columns>
+template<typename T, unsigned int num_rows, unsigned int num_columns>
 class Matrix {
 private:
-    complex<double> elem[rows][columns];
-
+    T elem[num_rows][num_columns];
 public:
+    // default constructor
     Matrix();
 
     // Copy constructor
@@ -31,19 +31,16 @@ public:
     // Move assignment
     Matrix &operator=(Matrix &&m);
 
+
     void transpose();
 
-    // operator[][]
-    complex<double> &operator()(unsigned int i, unsigned int j) {
-        return elem[i][j];
+    T* operator[](unsigned int index) { /// return a vector which is the row, note that this way, you can get the full coordinate using m[i][j]
+        return (elem[index]); // TODO: Is this the best way to implement [][] operator? look into proxy classes????
     }
 
-    Matrix transposed();
+    Vector<T, num_rows> getRow(unsigned int row);
 
-
-
-
-
+    Vector<T, num_columns> getColumn(unsigned int column) const;
 
 
 
@@ -51,6 +48,8 @@ public:
     // Destructor
     ~Matrix() = default;
 };
+
+#include "Matrix.tpp"
 
 
 

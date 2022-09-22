@@ -1,8 +1,11 @@
-#include <iostream>
-#include "Vector.h"
+#include "Matrix.h"
 
-Vector<double, 3> v1 {1, 2, 3};
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Matrix<double, 3, 3> m;
+
+    m[0][0] = 12;
+    cout<< m[0][0] << endl;
+
+
     return 0;
 }
