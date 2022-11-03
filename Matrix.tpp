@@ -2,7 +2,7 @@
 
 #include "Matrix.h"
 
-// default constructor
+// default constructor (Initializes a zero matrix)
 template<unsigned int num_rows, unsigned int num_columns, typename T>
 Matrix<num_rows, num_columns, T>::Matrix() {
     for (int i = 0; i < num_rows; i++) {
@@ -144,7 +144,52 @@ Matrix<num_rows, num_col_2, T> result;
     return result;
 }
 
+template<unsigned int num_rows, unsigned int num_columns, typename T>
+Vector<T, num_columns> Matrix<num_rows, num_columns, T>::GaussianElimination(Vector<T, num_columns> &v) const {
+    
+    Matrix<num_rows, num_columns, T> m = *this;
+    Vector<T, num_columns> coeff;
+    for (int j = 0; j < num_columns; j++)
+    {
+        for (int i = 0; i < num_rows; i++)
+        {
+            if (m[i][j] != 0) // what if m[j][j] = 0, code breaks?
+            {
+                auto lam = m.elem[i][j]/m.elem[j][j];
+                for (int k = j; k < num_columns; k++)
+                {
+                    m.elem[i][k] = m.elem[i][k] - lam*m.elem[j, k]; // ERROR
+                    v[i] = v[i] - lam*v[j];
+                }
+                
+            }
+            
+        }
+        
+    }
+    /*
+        operations with m.elem[i , i] are not working, 
+        Error message: invalid operands to binary expression ('double' and 'double [2]')
 
+        Possible solution: check out the return value and try to edit it to suit the program
+                            else create a new function to handle this operation.
+    */
+
+    // Back substitution
+
+    for (int i = num_columns-1; i > -1; i--)
+    {
+        // dot product over values from i + 1 to num_columns
+        for (int k = i+1; k < num_columns; k++)
+        {           
+            coeff[i] = (v[i] - m.elem[i][k] * v[k] / m.elem[k, k]); // ERROR
+        }
+        
+    }
+    
+    return coeff;
+    
+}
 
 
 

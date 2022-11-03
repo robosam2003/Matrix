@@ -5,7 +5,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 #include <iostream>
-#include "Vector.h"
+#include "Vector/Vector.h"
 
 using namespace std;
 
@@ -84,7 +84,7 @@ public:
 
     Vector<T, num_columns> getColumn(unsigned int column) const;
 
-
+    Vector<T, num_columns> GaussianElimination(Vector<T, num_columns> &v) const;
 
 
     // Destructor
