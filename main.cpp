@@ -1,6 +1,8 @@
 #include "Matrix.h"
 
 int main() {
+
+    /*
     Matrix<3, 3> m;
     Matrix<3, 3> m2;
 
@@ -23,25 +25,33 @@ int main() {
     double mult = 0.78;
     double ans = mult*m[0][0];
     std::cout<< ans << std::endl;
+    
+    */
 
     // test for Gaussian Elimination [NOT READY TO BE TESTED: 2 ERRORS]
- /*
-    Matrix<2,2> LS;
+ 
+    Matrix<3,3> LS;
     LS[0][0] = 1;
-    LS[0][1] = 2;
-    LS[1][0] = 3;
-    LS[1][1] = -1;
+    LS[0][1] = -1;
+    LS[0][2] = 1;
+    LS[1][0] = 2;
+    LS[1][1] = 3;
+    LS[1][2] = -1;
+    LS[2][0] = 3;
+    LS[2][1] = -2;
+    LS[2][2] = -9;
 
-    Vector<double, 2> B;
-    B[0] = 17;
-    B[1] = 9;
+    Vector<double, 3> B;
+    B[0] = 8;
+    B[1] = -2;
+    B[2] = 9;
 
-    Vector<double, 2> Out;
+    Vector<double, 3> Out;
     Out = LS.GaussianElimination(B);
 
-    // we should get 5 and 6
-    std::cout<<Out[0] << " " << Out[1] << std:: endl;
- */
+    // we should get 1,2,3
+    std::cout<<Out[0] << " " << Out[1] << " " << Out[2] << std:: endl;
+
     
 
     return 0;

@@ -149,43 +149,37 @@ Vector<T, num_columns> Matrix<num_rows, num_columns, T>::GaussianElimination(Vec
     
     Matrix<num_rows, num_columns, T> m = *this;
     Vector<T, num_columns> coeff;
-    for (int j = 0; j < num_columns; j++)
+
+    for (int j = 0; j < num_columns-1; j++)
     {
-        for (int i = 0; i < num_rows; i++)
+        for (int i = j+1; i < num_rows; i++)
         {
-            if (m[i][j] != 0) // what if m[j][j] = 0, code breaks?
+            if (m[i][j] != 0) // what if m[j][j] = 0, code breaks? solution: Augmented Matrix
             {
                 auto lam = m.elem[i][j]/m.elem[j][j];
                 for (int k = j; k < num_columns; k++)
                 {
-                    m.elem[i][k] = m.elem[i][k] - lam*m.elem[j, k]; // ERROR
-                    v[i] = v[i] - lam*v[j];
+                    m.elem[i][k] = m.elem[i][k] - lam*m.elem[j][k];
                 }
-                
+                v[i] = v[i] - lam*v[j];
             }
             
         }
         
     }
-    /*
-        operations with m.elem[i , i] are not working, 
-        Error message: invalid operands to binary expression ('double' and 'double [2]')
-
-        Possible solution: check out the return value and try to edit it to suit the program
-                            else create a new function to handle this operation.
-    */
 
     // Back substitution
-
-    for (int i = num_columns-1; i > -1; i--)
+    
+    for (int k = num_rows-1; k > -1; k = k-1)
     {
-        // dot product over values from i + 1 to num_columns
-        for (int k = i+1; k < num_columns; k++)
-        {           
-            coeff[i] = (v[i] - m.elem[i][k] * v[k] / m.elem[k, k]); // ERROR
+        auto sigma = 0;
+        for (int j = k+1; j < num_columns; j++)
+        {
+            sigma += (m.elem[k][j]*coeff[j]);
         }
-        
+        coeff[k] = (v[k] - sigma)/m.elem[k][k];
     }
+    
     
     return coeff;
     
