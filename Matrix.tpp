@@ -12,6 +12,21 @@ Matrix<num_rows, num_columns, T>::Matrix() {
     }
 }
 
+// std::initializer_list constructor
+template<unsigned int num_rows, unsigned int num_columns, typename T>
+Matrix<num_rows, num_columns, T>::Matrix(initializer_list<std::initializer_list<T>> list) {
+    int i = 0;
+    for (auto row : list) {
+        int j = 0;
+        for (auto col : row) {
+            elem[i][j] = col;
+            j++;
+        }
+        i++;
+    }
+}
+
+
 // Copy constructor
 template<unsigned int num_rows, unsigned int num_columns, typename T>
 Matrix<num_rows, num_columns, T>::Matrix(const Matrix &m) {
@@ -143,6 +158,7 @@ Matrix<num_rows, num_col_2, T> result;
     }
     return result;
 }
+
 
 
 

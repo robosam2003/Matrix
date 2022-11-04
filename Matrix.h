@@ -35,6 +35,9 @@ public:
     // default constructor
     Matrix();
 
+    // std::initializer_list constructor
+    Matrix(std::initializer_list<std::initializer_list<T>> list);
+
     // Copy constructor
     Matrix(const Matrix &m);
 

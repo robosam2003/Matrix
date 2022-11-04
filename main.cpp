@@ -1,14 +1,18 @@
 #include "Matrix.h"
 
 int main() {
-    Matrix<3, 3> m;
-    Matrix<3, 3> m2;
+    Matrix<3, 3> m = {{1,2,3},
+                      {4,5,6},
+                      {7,8,9}};
 
-    m[0][0] = 12;
-    m2[0][0] = 5;
-
-    Matrix<3, 3> m3 = m*m2;
-    std::cout << m3[0][0] << std::endl;
+    // print the matrix
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            std::cout << m[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
 
     return 0;
+
 }
