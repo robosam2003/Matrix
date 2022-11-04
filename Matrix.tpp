@@ -104,6 +104,13 @@ void Matrix<num_rows, num_columns, T>::transpose() {
 }
 
 template<unsigned int num_rows, unsigned int num_columns, typename T>
+Matrix<num_rows, num_columns, T> Matrix<num_rows, num_columns, T>::transposed() const {
+    Matrix<num_rows, num_columns, T> m = *this;
+    m.transpose();
+    return m;
+}
+
+template<unsigned int num_rows, unsigned int num_columns, typename T>
 Vector<T, num_rows> Matrix<num_rows, num_columns, T>::getRow(unsigned int row) {
     Vector<T, num_rows> v;
     for (int i = 0; i < num_rows; i++) {
@@ -158,6 +165,9 @@ Matrix<num_rows, num_col_2, T> result;
     }
     return result;
 }
+
+
+
 
 
 

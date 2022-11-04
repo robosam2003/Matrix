@@ -80,7 +80,7 @@ public:
 
     void transpose(); // NOT const (as it changes the matrix elements)
 
-    Matrix transposed() const;
+    Matrix<num_rows, num_columns, T> transposed() const;
 
     Vector<T, num_rows> getRow(unsigned int row);
 
