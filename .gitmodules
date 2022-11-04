@@ -1,3 +1,6 @@
 [submodule "Vector"]
 	path = Vector
 	url = https://github.com/TeamSunride/Vector
+[submodule "googletest"]
+	path = googletest
+	url = https://github.com/google/googletest

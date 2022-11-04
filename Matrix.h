@@ -20,7 +20,6 @@ private:
 public:
 
 
-    // TODO: Add std::initializer_list constructor
     // TODO: Eigenvectors and eigenvalues calculation.
     // TODO: Neat, clear way of changing basis
     // TODO: Determinant
