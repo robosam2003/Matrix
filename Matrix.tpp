@@ -146,26 +146,31 @@ Matrix<num_rows, num_col_2, T> result;
 
 
 template<unsigned int num_rows, unsigned int num_columns, typename T>
-void Matrix<num_rows, num_columns, T>::PartialPivotMatrix(){
+void Matrix<num_rows, num_columns, T>::PartialPivotMatrix(Vector<T, num_columns> &v){
     Matrix<num_rows, num_columns, T> m = *this;
 
-    auto pivotRow = -1;
+    auto pivotRow = 0;
     for (int i = 0; i < num_rows; i++)
     {
-        if (m.elem[i][0] < m.elem[i+1][0])
+        if (m.elem[0][0] < m.elem[i][0])
         {
-            pivotRow = i+1;
+            pivotRow = i;
             //std::cout<<elem[i][j]<<std::endl;
         }
     }
     
     for (int j = 0; j < num_rows; j++)
     {
+        //auto temp = 0;
+        //temp = m.elem[0][j];
         elem[0][j] = m.elem[pivotRow][j];
         elem[pivotRow][j] = m.elem[0][j];
-        
     }
-    
+    auto temp = 0;
+    temp = v[0];
+    v[0] = v[pivotRow];
+    v[pivotRow] = temp;
+    std::cout<<v[0]<<std::endl;
 }
 
 /*
@@ -183,7 +188,7 @@ Vector<T, num_columns> Matrix<num_rows, num_columns, T>::GaussianElimination(Vec
     
     Matrix<num_rows, num_columns, T> m = *this;
     Vector<T, num_columns> coeff;
-    m.PartialPivotMatrix();
+    m.PartialPivotMatrix(v);
 
     for (int j = 0; j < num_columns-1; j++)
     {

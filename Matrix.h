@@ -86,7 +86,7 @@ public:
 
     Vector<T, num_columns> GaussianElimination(Vector<T, num_columns> &v) const;
 
-   void PartialPivotMatrix();
+   void PartialPivotMatrix(Vector<T, num_columns> &v);
 
     // Destructor
     ~Matrix() = default;

@@ -49,11 +49,14 @@ int main() {
     Vector<double, 3> Out;
     Out = LS.GaussianElimination(B);
 
-    // we should get 1,2,3
+    
     std::cout<<Out[0] << " " << Out[1] << " " << Out[2] << std:: endl;
 
     // partial pivot test
-    LS.PartialPivotMatrix(); // success 
+
+    // LS.PartialPivotMatrix(B); // success 
+
+    /*
     std::cout<<LS[0][0]<<std::endl;
     std::cout<<LS[0][1]<<std::endl;
     std::cout<<LS[0][2]<<std::endl;
@@ -63,9 +66,13 @@ int main() {
     std::cout<<LS[2][0]<<std::endl;
     std::cout<<LS[2][1]<<std::endl;
     std::cout<<LS[2][2]<<std::endl;
-
-
+    */
+   
+    std::cout<<B[0]<<std::endl;
+    std::cout<<B[1]<<std::endl;
+    std::cout<<B[2]<<std::endl;
     return 0;
+   
 }
 
 /*
