@@ -52,7 +52,18 @@ int main() {
     // we should get 1,2,3
     std::cout<<Out[0] << " " << Out[1] << " " << Out[2] << std:: endl;
 
-    
+    // partial pivot test
+    LS.PartialPivotMatrix(); // success 
+    std::cout<<LS[0][0]<<std::endl;
+    std::cout<<LS[0][1]<<std::endl;
+    std::cout<<LS[0][2]<<std::endl;
+    std::cout<<LS[1][0]<<std::endl;
+    std::cout<<LS[1][1]<<std::endl;
+    std::cout<<LS[1][2]<<std::endl;
+    std::cout<<LS[2][0]<<std::endl;
+    std::cout<<LS[2][1]<<std::endl;
+    std::cout<<LS[2][2]<<std::endl;
+
 
     return 0;
 }

@@ -144,17 +144,52 @@ Matrix<num_rows, num_col_2, T> result;
     return result;
 }
 
+
+template<unsigned int num_rows, unsigned int num_columns, typename T>
+void Matrix<num_rows, num_columns, T>::PartialPivotMatrix(){
+    Matrix<num_rows, num_columns, T> m = *this;
+
+    auto pivotRow = -1;
+    for (int i = 0; i < num_rows; i++)
+    {
+        if (m.elem[i][0] < m.elem[i+1][0])
+        {
+            pivotRow = i+1;
+            //std::cout<<elem[i][j]<<std::endl;
+        }
+    }
+    
+    for (int j = 0; j < num_rows; j++)
+    {
+        elem[0][j] = m.elem[pivotRow][j];
+        elem[pivotRow][j] = m.elem[0][j];
+        
+    }
+    
+}
+
+/*
+    partial pivoting changed the answer to gaussian elimination slightly: 
+    GassElim: 4 -3 1
+    GaussElim with PP: 4.333 -3.07 1.31
+
+    its supposed to prevent rounding errors so it might be a good thing but more rigorous testing required
+*/
+
+
+
 template<unsigned int num_rows, unsigned int num_columns, typename T>
 Vector<T, num_columns> Matrix<num_rows, num_columns, T>::GaussianElimination(Vector<T, num_columns> &v) const {
     
     Matrix<num_rows, num_columns, T> m = *this;
     Vector<T, num_columns> coeff;
+    m.PartialPivotMatrix();
 
     for (int j = 0; j < num_columns-1; j++)
     {
         for (int i = j+1; i < num_rows; i++)
         {
-            if (m[i][j] != 0) // what if m[j][j] = 0, code breaks? solution: Augmented Matrix
+            if (m[i][j] != 0) // what if m[j][j] = 0, code breaks? TEST required
             {
                 auto lam = m.elem[i][j]/m.elem[j][j];
                 for (int k = j; k < num_columns; k++)
