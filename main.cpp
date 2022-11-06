@@ -1,55 +1,35 @@
 #include "Matrix.h"
 
+
 int main() {
+    Matrix<3, 3> m = {{1.1,2.2,3.3},
+                      {4.4,5.5,6.6},
+                      {7.7,8.8,9.9}};
 
-    /*
-    Matrix<3, 3> m;
-    Matrix<3, 3> m2;
+    Matrix<2, 2, int> m2 = (Matrix<2, 2, int>) m;
+    // m2 = 1 2 3 0
+    //      4 5 6 0
+    //      7 8 9 0
+    //      0 0 0 0
 
-    m[0][0] = 12;
-    m2[0][0] = 5;
 
-    Matrix<3, 3> m3 = m*m2;
-    std::cout << m3[0][1] << std::endl;
-
-    Vector<double,3> v;
-
-    v = m3.getColumn(0);
-    std::cout << v[0] << std::endl;
-
-    // testing scalar multiplication
-    m = m3.operator*(3);
-    std::cout<<m[0][0]<<std::endl;
-
-    // testing multiplication of individual elem
-    double mult = 0.78;
-    double ans = mult*m[0][0];
-    std::cout<< ans << std::endl;
-    
-    */
-
-    // test for Gaussian Elimination [NOT READY TO BE TESTED: 2 ERRORS]
- 
-    Matrix<3,3> LS;
-    LS[0][0] = 1;
-    LS[0][1] = 4;
-    LS[0][2] = -1;
-    LS[1][0] = 2;
-    LS[1][1] = 5;
-    LS[1][2] = 8;
-    LS[2][0] = 1;
-    LS[2][1] = 3;
-    LS[2][2] = -3;
+    // print the matrix
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            std::cout << m2[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
 
     Vector<double, 3> B;
     B[0] = 4;
     B[1] = 15;
     B[2] = 1;
 
-    Vector<double, 3> Out;
-    Out = LS.GaussianElimination(B);
+    //Vector<double, 3> Out;
+    //Out = LS.GaussianElimination(B);
     
-    std::cout<<Out[0] << " " << Out[1] << " " << Out[2] << std:: endl;
+    //std::cout<<Out[0] << " " << Out[1] << " " << Out[2] << std:: endl;
 
     // partial pivot test
 
@@ -63,7 +43,6 @@ int main() {
    */
    
     return 0;
-   
 }
 
 /*
