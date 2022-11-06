@@ -144,45 +144,56 @@ Matrix<num_rows, num_col_2, T> result;
     return result;
 }
 
+// To display the matrix in command line 
+template<unsigned int num_rows, unsigned int num_columns, typename T>
+void Matrix<num_rows, num_columns, T>::Display(){
+    Matrix<num_rows, num_columns, T> m = *this;
+
+    for (int i = 0; i < num_rows; i++)
+    {
+        for (int j = 0; j < num_columns; j++)
+        {
+            std::cout<<m.elem[i][j] << "\t";
+        }
+        std::cout<<"\n";
+    }
+    
+}
+
+
 
 template<unsigned int num_rows, unsigned int num_columns, typename T>
 void Matrix<num_rows, num_columns, T>::PartialPivotMatrix(Vector<T, num_columns> &v){
     Matrix<num_rows, num_columns, T> m = *this;
 
-    auto pivotRow = 0;
-    for (int i = 0; i < num_rows; i++)
+    auto temp = 0;
+    auto temp2 =0;
+    for (int i = 0; i < num_rows-1; i++)
     {
-        if (m.elem[0][0] < m.elem[i][0])
+        for (int k = i+1; k < num_rows; k++)
         {
-            pivotRow = i;
-            //std::cout<<elem[i][j]<<std::endl;
+            if (std::abs(elem[i][i]) < std::abs(elem[k][i]))
+            {
+                
+                for (int j = 0; j < num_columns; j++)
+                {
+                    temp = elem[i][j];
+                    elem[i][j] = elem[k][j];
+                    elem[k][j] = temp;
+                }
+
+                temp = v[i];
+                v[i] = v[k];
+                v[k] = temp;
+                
+            }
         }
+        
     }
     
-    for (int j = 0; j < num_rows; j++)
-    {
-        //auto temp = 0;
-        //temp = m.elem[0][j];
-        elem[0][j] = m.elem[pivotRow][j];
-        elem[pivotRow][j] = m.elem[0][j];
-    }
-    auto temp = 0;
-    temp = v[0];
-    v[0] = v[pivotRow];
-    v[pivotRow] = temp;
-    std::cout<<v[0]<<std::endl;
 }
 
-/*
-    partial pivoting changed the answer to gaussian elimination slightly: 
-    GassElim: 4 -3 1
-    GaussElim with PP: 4.333 -3.07 1.31
-
-    its supposed to prevent rounding errors so it might be a good thing but more rigorous testing required
-*/
-
-
-
+// Non-Singular Matrix ONLY, a check will be implemented as soon as Determinant() is complete
 template<unsigned int num_rows, unsigned int num_columns, typename T>
 Vector<T, num_columns> Matrix<num_rows, num_columns, T>::GaussianElimination(Vector<T, num_columns> &v) const {
     
@@ -206,16 +217,16 @@ Vector<T, num_columns> Matrix<num_rows, num_columns, T>::GaussianElimination(Vec
             
         }
         
+        
     }
 
     // Back substitution
-    
     for (int k = num_rows-1; k > -1; k = k-1)
     {
         auto sigma = 0;
         for (int j = k+1; j < num_columns; j++)
         {
-            sigma += (m.elem[k][j]*coeff[j]);
+            sigma += (m.elem[k][j]*(float)coeff[j]);
         }
         coeff[k] = (v[k] - sigma)/m.elem[k][k];
     }

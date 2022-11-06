@@ -32,45 +32,36 @@ int main() {
  
     Matrix<3,3> LS;
     LS[0][0] = 1;
-    LS[0][1] = -1;
-    LS[0][2] = 1;
+    LS[0][1] = 4;
+    LS[0][2] = -1;
     LS[1][0] = 2;
-    LS[1][1] = 3;
-    LS[1][2] = -1;
-    LS[2][0] = 3;
-    LS[2][1] = -2;
-    LS[2][2] = -9;
+    LS[1][1] = 5;
+    LS[1][2] = 8;
+    LS[2][0] = 1;
+    LS[2][1] = 3;
+    LS[2][2] = -3;
 
     Vector<double, 3> B;
-    B[0] = 8;
-    B[1] = -2;
-    B[2] = 9;
+    B[0] = 4;
+    B[1] = 15;
+    B[2] = 1;
 
     Vector<double, 3> Out;
     Out = LS.GaussianElimination(B);
-
     
     std::cout<<Out[0] << " " << Out[1] << " " << Out[2] << std:: endl;
 
     // partial pivot test
 
-    // LS.PartialPivotMatrix(B); // success 
+    //LS.PartialPivotMatrix(B); // success 
+    //LS.Display();
 
-    /*
-    std::cout<<LS[0][0]<<std::endl;
-    std::cout<<LS[0][1]<<std::endl;
-    std::cout<<LS[0][2]<<std::endl;
-    std::cout<<LS[1][0]<<std::endl;
-    std::cout<<LS[1][1]<<std::endl;
-    std::cout<<LS[1][2]<<std::endl;
-    std::cout<<LS[2][0]<<std::endl;
-    std::cout<<LS[2][1]<<std::endl;
-    std::cout<<LS[2][2]<<std::endl;
-    */
-   
+   /*
     std::cout<<B[0]<<std::endl;
     std::cout<<B[1]<<std::endl;
     std::cout<<B[2]<<std::endl;
+   */
+   
     return 0;
    
 }
