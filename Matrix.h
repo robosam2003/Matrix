@@ -24,7 +24,6 @@ public:
     // TODO: Neat, clear way of changing basis
     // TODO: Determinant
     // TODO: Inverse
-    // TODO: Casting to new type (and size)
     // which allows for    // appendRow and appendColumn - NEEDED?
     // TODO: Submatricies of matrix
 

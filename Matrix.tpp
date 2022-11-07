@@ -181,7 +181,7 @@ Matrix<num_rows, num_col_2, T> result;
 }
 
 // To display the matrix in command line 
-template<unsigned int num_rows, unsigned int num_columns, typename T>
+template<unsigned int num_rows, unsigned int num_columns, class T>
 void Matrix<num_rows, num_columns, T>::Display(){
     Matrix<num_rows, num_columns, T> m = *this;
 
@@ -198,86 +198,54 @@ void Matrix<num_rows, num_columns, T>::Display(){
 
 
 
-template<unsigned int num_rows, unsigned int num_columns, typename T>
+template<unsigned int num_rows, unsigned int num_columns, class T>
 void Matrix<num_rows, num_columns, T>::PartialPivotMatrix(Vector<T, num_columns> &v){
     Matrix<num_rows, num_columns, T> m = *this;
 
     auto temp = 0;
-    auto temp2 =0;
-    for (int i = 0; i < num_rows-1; i++)
-    {
-        for (int k = i+1; k < num_rows; k++)
-        {
-            if (std::abs(elem[i][i]) < std::abs(elem[k][i]))
-            {
-                
-                for (int j = 0; j < num_columns; j++)
-                {
+    for (int i = 0; i < num_rows-1; i++) {
+        for (int k = i+1; k < num_rows; k++) {
+            if (std::abs(elem[i][i]) < std::abs(elem[k][i])) {
+                for (int j = 0; j < num_columns; j++) {
                     temp = elem[i][j];
                     elem[i][j] = elem[k][j];
                     elem[k][j] = temp;
                 }
-
                 temp = v[i];
                 v[i] = v[k];
                 v[k] = temp;
-                
             }
         }
-        
     }
-    
 }
 
 // Non-Singular Matrix ONLY, a check will be implemented as soon as Determinant() is complete
-template<unsigned int num_rows, unsigned int num_columns, typename T>
+template<unsigned int num_rows, unsigned int num_columns, class T>
 Vector<T, num_columns> Matrix<num_rows, num_columns, T>::GaussianElimination(Vector<T, num_columns> &v) const {
     
     Matrix<num_rows, num_columns, T> m = *this;
     Vector<T, num_columns> coeff;
     m.PartialPivotMatrix(v);
 
-    for (int j = 0; j < num_columns-1; j++)
-    {
-        for (int i = j+1; i < num_rows; i++)
-        {
-            if (m[i][j] != 0) // what if m[j][j] = 0, code breaks? TEST required
-            {
+    for (int j = 0; j < num_columns-1; j++) {
+        for (int i = j+1; i < num_rows; i++) {
+            if (m[i][j] != 0) { // what if m[j][j] = 0, code breaks? TEST required
                 auto lam = m.elem[i][j]/m.elem[j][j];
-                for (int k = j; k < num_columns; k++)
-                {
+                for (int k = j; k < num_columns; k++) {
                     m.elem[i][k] = m.elem[i][k] - lam*m.elem[j][k];
                 }
                 v[i] = v[i] - lam*v[j];
             }
-            
         }
-        
-        
     }
 
     // Back substitution
-    for (int k = num_rows-1; k > -1; k = k-1)
-    {
+    for (int k = num_rows-1; k > -1; k = k-1) {
         auto sigma = 0;
-        for (int j = k+1; j < num_columns; j++)
-        {
+        for (int j = k+1; j < num_columns; j++) {
             sigma += (m.elem[k][j]*(float)coeff[j]);
         }
         coeff[k] = (v[k] - sigma)/m.elem[k][k];
     }
-    
-    
     return coeff;
-    
 }
-
-
-
-
-
-
-
-
-
-

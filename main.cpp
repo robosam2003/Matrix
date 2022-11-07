@@ -13,28 +13,22 @@ int main() {
     //      0 0 0 0
 
 
-    // print the matrix
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            std::cout << m2[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
+
 
     Vector<double, 3> B;
     B[0] = 4;
     B[1] = 15;
     B[2] = 1;
 
-    //Vector<double, 3> Out;
-    //Out = LS.GaussianElimination(B);
+    Vector<double, 3> Out = {0,0,0};
+    Out = m.GaussianElimination(B);
     
-    //std::cout<<Out[0] << " " << Out[1] << " " << Out[2] << std:: endl;
+    std::cout<<Out[0] << " " << Out[1] << " " << Out[2] << std:: endl;
 
-    // partial pivot test
+     // partial pivot test
 
-    //LS.PartialPivotMatrix(B); // success 
-    //LS.Display();
+    m.PartialPivotMatrix(B); // success
+    m.Display();
 
    /*
     std::cout<<B[0]<<std::endl;
