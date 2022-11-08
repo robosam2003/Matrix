@@ -22,7 +22,7 @@ public:
 
     // TODO: Eigenvectors and eigenvalues calculation.
     // TODO: Neat, clear way of changing basis
-    // TODO: Determinant
+    // TODO: Determinant - LU decomposition
     // TODO: Inverse
     // which allows for    // appendRow and appendColumn - NEEDED?
     // TODO: Submatricies of matrix
@@ -62,7 +62,6 @@ public:
     Vector<T, num_columns> operator*(const Vector<T, num_columns> &v) const;
 
     // Multiply by matrix
-    // TODO: try second template for parameter to allow for different sized matrices, sort names of template parameters
     template<unsigned int num_col_2, class D>
         // Returns a matrix with size: number of rows from the first  x  number of columns from the second.
         // Second matrix (input) must have the same number of rows as the first matrix (this) has columns.
@@ -84,6 +83,8 @@ public:
 
     Matrix<num_rows, num_columns, T> transposed() const;
 
+    T trace() const; // returns the trace of the matrix (sum of diagonal elements)
+
     Vector<T, num_rows> getRow(unsigned int row);
 
     Vector<T, num_columns> getColumn(unsigned int column) const;
@@ -93,6 +94,8 @@ public:
     Vector<T, num_columns> GaussianElimination(Vector<T, num_columns> &v) const;
 
     void PartialPivotMatrix(Vector<T, num_columns> &v);
+
+    void LUDecompose(Matrix<num_rows, num_columns, T> &L, Matrix<num_rows, num_columns, T> &U) const;
 
     // Destructor
     ~Matrix() = default;

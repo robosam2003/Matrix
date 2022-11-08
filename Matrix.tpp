@@ -125,6 +125,16 @@ Matrix<num_rows, num_columns, T> Matrix<num_rows, num_columns, T>::transposed() 
 }
 
 template<unsigned int num_rows, unsigned int num_columns, class T>
+T Matrix<num_rows, num_columns, T>::trace() const {
+    T result = 0;
+    for (int i = 0; i < min(num_rows, num_columns); i++) {
+        result += elem[i][i];
+    }
+    return result;
+}
+
+
+template<unsigned int num_rows, unsigned int num_columns, class T>
 Vector<T, num_rows> Matrix<num_rows, num_columns, T>::getRow(unsigned int row) {
     Vector<T, num_rows> v;
     for (int i = 0; i < num_rows; i++) {
@@ -249,3 +259,4 @@ Vector<T, num_columns> Matrix<num_rows, num_columns, T>::GaussianElimination(Vec
     }
     return coeff;
 }
+
