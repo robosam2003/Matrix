@@ -151,31 +151,22 @@ TEST(transpose, three_by_three) {
     EXPECT_EQ(n[2][0], 3); EXPECT_EQ(n[2][1], 6); EXPECT_EQ(n[2][2], 9);
 }
 
+// Trace
+TEST(trace, one_by_one){
+    Matrix<1,1> m = {{1}};
+    EXPECT_EQ(m.trace(), 1);
+}
 
+TEST(trace, two_by_two) {
+    Matrix<2, 2> m = {{1, 2},
+                      {3, 4}};
+    EXPECT_EQ(m.trace(), 5);
+}
 
-//int multiply() {
-//    int test_result = 0;
-//
-//    // test 1 x 1
-//    Matrix<1, 1> m11_1 = {{1}};
-//    Matrix<1, 1> m11_2 = {{2}};
-//    Matrix<1, 1> m11_3 = m11_1 * m11_2;
-//    // assert truth
-//    if (m11_3[0][0] != 2) {
-//        test_result = 1;
-//    }
-//
-//    // test 2 x 2
-//    Matrix<2, 2> m22_1 = {{1, 2},
-//                          {3, 4}};
-//    Matrix<2, 2> m22_2 = {{5, 6},
-//                          {7, 8}};
-//    Matrix<2, 2> m22_3 = m22_1 * m22_2;
-//
-//    return test_result;
-//
-//}
-//
-//int main() {
-//    return multiply();
-//}
+TEST(trace, three_by_three) {
+    Matrix<3, 3> m = {{1, 2, 3},
+                      {4, 5, 6},
+                      {7, 8, 9}};
+    EXPECT_EQ(m.trace(), 15);
+}
+
